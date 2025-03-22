@@ -109,7 +109,7 @@
     align-items: center;
     justify-content: center;
   }
-  
+
   .form-box {
     width: 300px;
     padding: 20px 40px;
@@ -117,16 +117,16 @@
     background-color: #ffffff;
     opacity: 1;
   }
-  .form-box ::v-deep(.el-form-item) {
+  .form-box /deep/ .el-form-item {
     margin-bottom: 5px;
   }
-  .form-box ::v-deep(.el-input__inner) {
+  .form-box /deep/ .el-input__inner {
     border-color: #ccc !important;
     border-radius: 2px;
     background-color: #ffffff !important;
     color: #333;
   }
-  .form-box ::v-deep(.el-input__icon) {
+  .form-box /deep/ .el-input__icon {
     color: #666;
   }
   

@@ -3,13 +3,13 @@
       <div v-if="currentMusicUrl" class="player-container" style="width: 400px; display: flex; align-items: center;">
         <!-- 歌曲封面 -->
         <img :src="currentSong.cover" alt="Cover" style="width: 60px; height: 60px; border-radius: 4px; margin-right: 20px;">
-        
+
         <!-- 歌曲信息 -->
         <div style="flex-grow: 1;">
           <h4>{{ currentSong.name }}</h4>
           <p>{{ currentSong.artist }}</p>
         </div>
-        
+
         <!-- 播放控制 -->
         <div class="controls" style="display: flex; justify-content: center; align-items: center;">
           <el-button icon="el-icon-prev" @click="playPrevious"></el-button>
@@ -20,7 +20,7 @@
       <audio v-if="currentMusicUrl" ref="audioPlayer" :src="currentMusicUrl" @play="onPlay" @pause="onPause" @ended="onEnd" />
     </el-footer>
   </template>
-  
+
   <script>
   export default {
     data() {
@@ -97,29 +97,28 @@
     }
   }
   </script>
-  
+
   <style scoped>
   .player-container {
     display: flex;
     align-items: center;
   }
-  
+
   .controls {
     display: flex;
     justify-content: space-between;
     width: 120px;
   }
-  
+
   img {
     border-radius: 5px;
   }
-  
+
   h4, p {
     margin: 0;
   }
-  
+
   .el-button {
     padding: 0;
   }
   </style>
-  

@@ -129,23 +129,18 @@
         <div class="player-container">
           <!-- 封面 -->
           <img :src="song.pic" alt="封面" class="cover-img" />
-
           <!-- 歌曲信息 -->
           <div class="song-info">
             <h3>{{ song.name }}</h3>
             <p>{{ song.singer_name }}</p>
           </div>
-
           <!-- 播放 / 暂停按钮 -->
           <button @click="togglePlay">{{ isPlaying ? "暂停" : "播放" }}</button>
-
           <!-- 进度条 -->
           <input type="range" min="0" :max="duration" v-model="currentTime" @input="seekAudio" />
-
           <!-- 时间显示 -->
           <span>{{ formatTime(currentTime) }} / {{ formatTime(duration) }}</span>
         </div>
-
         <!-- 隐藏的音频元素 -->
         <audio ref="audioPlayer" :src="audioUrl" @timeupdate="updateTime" @loadedmetadata="loadMetadata"></audio>
       </el-footer>
