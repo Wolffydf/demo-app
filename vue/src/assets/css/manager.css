@@ -1,0 +1,157 @@
+/* 全局字体设置，高级字体 */
+body {
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/*左侧边栏*/
+.m-aside {
+  width: 270px;
+  background: linear-gradient(to right, #1c5b8b, #c6e3ff); /* 从深蓝到浅蓝渐变 */
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/*侧边栏上面logo*/
+.m-sysName {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  border-bottom: 1px solid #e8e8e8;
+  /* 边框颜色调整 */
+}
+
+/*侧边栏上面的文字*/
+.m-nameText {
+  font-family: 华文新魏;
+  color: #FFFFFF;
+  /* 纯白色 */
+  margin-left: 10px;
+  font-size: 35px;
+  font-weight: 700;
+}
+
+/*侧边栏菜单栏*/
+.el-menu {
+  background: linear-gradient(to right, #1c5b8b, #c6e3ff);
+  border-right: none !important;
+}
+
+/*头部栏样式*/
+.el-header {
+  background: linear-gradient(to right, #c6e3ff, #f7f7f7);
+  /* 淡蓝色背景 */
+  border-bottom: 1px solid #e8e8e8;
+  /* 调整边框颜色 */
+  color: #ffffff;
+  height: 70px !important;
+  line-height: 70px;
+}
+
+/* 右侧背景颜色*/
+.right-container {
+  background: linear-gradient(to right, #c6e3ff, #e0e8f3);
+  /* 浅蓝色 */
+  height: 100vh;
+}
+
+/*顶部居中*/
+.top-header {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+/*侧边栏菜单一级字体颜色*/
+.el-submenu__title {
+  font-family: 华文细黑;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+
+/*侧边栏菜单悬浮背景颜色*/
+.el-menu-item:hover,
+.el-submenu__title:hover {
+  background: linear-gradient(to right, #0c35558a, #50a7f85a);
+  border-radius: 20px;
+  transition: background 0.5s ease;
+  
+}
+
+/*侧边栏二级字体颜色*/
+.el-menu-item {
+  font-family: 华文细黑;
+  color: #FFFFFF;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+/*二级菜单选中背景和颜色设置*/
+.el-menu-item.is-active {
+  color: #57ffdd;
+  /* 高亮蓝色 */
+  font-size: 14px;
+  background: linear-gradient(to right, #0c3555, #50a7f8);
+  font-weight: 600;
+  border-radius: 20px;
+}
+
+/* 主要内容区背景样式*/
+.tabble_ground {
+  width: 100%;
+  height: 1000px;
+  padding: 40px 40px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+/*  表格模块名*/
+.moudle_name {
+  margin-bottom: 40px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/*输入框和按钮的父盒子样式*/
+.input_button {
+  margin-bottom: 20px;
+  display: flex;
+}
+
+/*输入框父盒子样式*/
+.input_box {
+  flex: 10;
+  text-align: left;
+}
+
+/*按钮父盒子样式*/
+.button_box {
+  flex: 2;
+  text-align: right;
+}
+
+/*输入框样式*/
+.input_left {
+  width: 20%;
+  margin-right: 20px;
+}
+
+/*按钮样式*/
+.button_right {
+  border-radius: 4px;
+  width: 100px;
+  text-align: center;
+  background-color: #1C6DD0;
+  /* 亮蓝色 */
+  color: white;
+  border: none;
+  font-weight: 600;
+}
+
+.button_right:hover {
+  background-color: #1559B0;
+  /* 深蓝色 */
+}
