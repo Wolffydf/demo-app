@@ -20,11 +20,10 @@
       </el-header>
 
 
-
       <el-main style="background: linear-gradient(to right, #c6e3ff, #f7f7f7);">
         <!-- div1：主页 -->
         <div v-if="!showSearchResult"
-          style="padding: 40px; background: linear-gradient(to right, #c6e3ff, #f7f7f7); border-radius: 4px;">
+             style="padding: 40px; background: linear-gradient(to right, #c6e3ff, #f7f7f7); border-radius: 4px;">
           <!-- <h2>主页面内容，推荐歌单和热门歌曲展示</h2> -->
 
           <!-- 推荐歌单区 -->
@@ -32,7 +31,7 @@
             <h3>推荐歌单</h3>
             <div class="playlist-grid">
               <el-card v-for="playlist in Playlists" :key="playlist.id" class="playlist-card"
-                :style="{ backgroundImage: `url(${playlist.pic})` }">
+                       :style="{ backgroundImage: `url(${playlist.pic})` }">
                 <!-- <img :src="playlist.pic" alt="歌单封面" class="playlist-cover" /> -->
                 <div class="playlist-info">
                   <p class="playlist-title">{{ playlist.title }}</p>
@@ -59,7 +58,7 @@
                 <div class="blob"></div>
                 <!-- 添加歌曲信息 -->
                 <div class="song-cover-wrapper">
-                  <img :src="song.pic" alt="歌曲封面" class="song-cover" />
+                  <img :src="song.pic" alt="歌曲封面" class="song-cover"/>
                 </div>
                 <div class="song-info">
                   <p class="song-name">{{ song.name }}</p>
@@ -69,7 +68,6 @@
               </div>
             </div>
           </div>
-
 
 
           <!-- 最新发布的歌曲 -->
@@ -119,30 +117,14 @@
           <p v-if="tableData.length === 0" style="text-align: center; margin-top: 20px;">暂无搜索结果</p>
           <div class="block" style="text-align: right;margin-top: 20px">
             <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange"
-              :current-page="currentPage4" :page-sizes="[100, 200, 300, 400]" :page-size="100"
-              layout="prev, pager, next" :total="1000">
+                           :current-page="currentPage4" :page-sizes="[100, 200, 300, 400]" :page-size="100"
+                           layout="prev, pager, next" :total="1000">
             </el-pagination>
           </div>
         </div>
       </el-main>
-      <el-footer class="player-footer">
-        <div class="player-container">
-          <!-- 封面 -->
-          <img :src="song.pic" alt="封面" class="cover-img" />
-          <!-- 歌曲信息 -->
-          <div class="song-info">
-            <h3>{{ song.name }}</h3>
-            <p>{{ song.singer_name }}</p>
-          </div>
-          <!-- 播放 / 暂停按钮 -->
-          <button @click="togglePlay">{{ isPlaying ? "暂停" : "播放" }}</button>
-          <!-- 进度条 -->
-          <input type="range" min="0" :max="duration" v-model="currentTime" @input="seekAudio" />
-          <!-- 时间显示 -->
-          <span>{{ formatTime(currentTime) }} / {{ formatTime(duration) }}</span>
-        </div>
-        <!-- 隐藏的音频元素 -->
-        <audio ref="audioPlayer" :src="audioUrl" @timeupdate="updateTime" @loadedmetadata="loadMetadata"></audio>
+      <el-footer>
+        111
       </el-footer>
     </el-container>
   </div>
@@ -152,6 +134,7 @@
 <script>
 import request from "@/utils/request";
 import axios from 'axios';
+import { EventBus } from "@/assets/js/eventBus";
 
 export default {
   name: "SearchMusicFlex",
@@ -215,7 +198,7 @@ export default {
         return;
       }
       request.get('/song/search', {
-        params: { name: this.input1 }
+        params: {name: this.input1}
       }).then(res => {
         if (res.code === '0') {
           this.allData = res.data;
@@ -256,7 +239,7 @@ export default {
     openModal(song) {
       this.currentSong = null; // 先清空
       this.$forceUpdate();
-      this.currentSong = { ...song };
+      this.currentSong = {...song};
       console.log(this.currentSong);
       this.isModalOpen = true;
     },
@@ -266,15 +249,18 @@ export default {
     },
     playModal() {
       console.log('Song clicked:', this.currentSong);
-      this.song.id = this.currentSong.id;
-      this.song.url = this.currentSong.url;
-      this.song.name = this.currentSong.name;
-      this.song.singer_name = this.currentSong.singer_name;
-      // this.song.pic = this.currentSong.pic;
-      console.log(this.song.pic);
-      this.audioUrl = `http://localhost:8090/audio/${this.currentSong.id}`;
-      this.togglePlay();
+      const songData = {
+        id: this.currentSong.id,
+        url: `http://localhost:8090/audio/${this.currentSong.id}`,
+        name: this.currentSong.name,
+        singer_name: this.currentSong.singer_name,
+        pic: this.currentSong.pic || require('@/assets/img/record.png')
+      };
+
+      // 触发事件，传递歌曲数据
+      EventBus.$emit("update-song", songData);
     },
+
     playSound() {
       // 播放逻辑
     },
@@ -331,8 +317,7 @@ export default {
       if (audioPlayer) {
         if (this.isPlaying) {
           audioPlayer.pause();
-        }
-        else audioPlayer.play();
+        } else audioPlayer.play();
         this.isPlaying = !this.isPlaying;
       }
     },

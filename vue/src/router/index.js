@@ -29,11 +29,11 @@ const routes = [
     name: 'login',
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
   },
-  {
-    path: '/music_player',
-    name: 'music_player',
-    component: () => import(/* webpackChunkName: "about" */ '../views/MusicPlayer.vue'),
-  },
+  // {
+  //   path: '/music_player',
+  //   name: 'music_player',
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/MusicPlayer.vue'),
+  // },
 ]
 
 const router = new VueRouter({

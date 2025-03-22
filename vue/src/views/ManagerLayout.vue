@@ -57,20 +57,30 @@
 
       </el-container>
     </el-container>
-
+    <MusicPlayer v-if="showMusicPlayer" />
   </div>
 </template>
 
 <script>
 import request from "@/utils/request";
+import MusicPlayer from "@/views/MusicPlayer.vue";
 
 export default {
   name: "ManagerLayout",
-
+  components: {
+    MusicPlayer,
+  },
   data() {
     return {
       // 定义User对象，从缓存里取值
       user: JSON.parse(localStorage.getItem("user") || {}),
+    }
+  },
+
+  computed: {
+    showMusicPlayer() {
+      // 只在 /manager/home 页面显示音乐播放器
+      return this.$route.path === "/manager/home";
     }
   },
 
