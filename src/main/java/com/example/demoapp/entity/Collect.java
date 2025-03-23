@@ -22,5 +22,51 @@ public class Collect {
     @Column(name = "create_time")
     private LocalDateTime create_time;
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+
+    public Integer getSong_id() {
+        return song_id;
+    }
+
+    public void setSong_id(Integer song_id) {
+        this.song_id = song_id;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getPlaylist_id() {
+        return playlist_id;
+    }
+
+    public void setPlaylist_id(Integer playlist_id) {
+        this.playlist_id = playlist_id;
+    }
+
+    public LocalDateTime getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(LocalDateTime create_time) {
+        this.create_time = create_time;
+    }
 }

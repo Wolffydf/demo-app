@@ -13,9 +13,10 @@
 </el-input> -->
           <div class="search">
             <input v-model="input1" placeholder="Search..." type="text">
-            <button type="submit" @click="search_music">Go</button>
-          </div>
+            <button type="submit" @click="searchMusic">Go</button>&nbsp;
 
+          </div>
+          <button type="submit" @click="refreshRecommended" style="margin-left: 10px;">刷新</button>
         </div>
       </el-header>
 
@@ -49,11 +50,11 @@
 
           </div>
 
-          <!-- 热门歌曲区 -->
-          <div class="hot-songs-section" style="margin-top: 40px;">
-            <h3>热门歌曲</h3>
+          <!-- 推荐歌曲区 -->
+          <div class="recommended-songs-section" style="margin-top: 40px;">
+            <h3>推荐歌曲</h3>
             <div class="song-grid">
-              <div v-for="song in HotSongs" :key="song.id" class="song-card">
+              <div v-for="song in recommendedSongs" :key="song.id" class="song-card">
                 <div class="bg"></div>
                 <div class="blob"></div>
                 <!-- 添加歌曲信息 -->
@@ -154,25 +155,32 @@ export default {
       showSearchResult: false,
       audioUrl: "",
       Playlists: [],
-      HotSongs: [
+      recommendedSongs: [
         {
           id: 1,
           name: '晴天',
           singer_name: '周杰伦',
-          pic: 'https://example.com/qingtian.jpg'
+          pic: ''
         },
         {
           id: 2,
           name: '告白气球',
           singer_name: '周杰伦',
-          pic: 'https://example.com/gaobaiqiqiu.jpg'
+          pic: ''
         },
         {
           id: 3,
           name: '稻香',
           singer_name: '周杰伦',
-          pic: 'https://example.com/daoxiang.jpg'
-        }
+          pic: ''
+        },
+        {
+          id: 4,
+          name: '青花瓷',
+          singer_name: '周杰伦',
+          pic: ''
+        },
+
       ],
 
       // 音频播放器相关数据
@@ -192,7 +200,7 @@ export default {
     this.fetchRecommendedPlaylists();
   },
   methods: {
-    search_music() {
+    searchMusic() {
       if (!this.input1.trim()) {
         this.$notify.error('请输入歌曲名');
         return;
@@ -221,9 +229,7 @@ export default {
     handleClick(row) {
       console.log('播放歌曲:', row);
     },
-    navRegister() {
-      this.$router.push("/register");
-    },
+
     handleSizeChange(val) {
       this.pageSize = val;
       this.currentPage4 = 1; // 每页数量变了，回到第一页
@@ -232,9 +238,6 @@ export default {
     handleCurrentChange(val) {
       this.currentPage4 = val;
       this.updateTableData();
-    },
-    handleClickSongInfo(song) {
-      console.log('Song clicked:', song.name);
     },
     openModal(song) {
       this.currentSong = null; // 先清空
@@ -245,7 +248,7 @@ export default {
     },
     closeModal() {
       this.isModalOpen = false;
-      this.currentSong = null;
+      // this.currentSong = null;
     },
     playModal() {
       console.log('Song clicked:', this.currentSong);
@@ -259,10 +262,6 @@ export default {
 
       // 触发事件，传递歌曲数据
       EventBus.$emit("update-song", songData);
-    },
-
-    playSound() {
-      // 播放逻辑
     },
 
     async fetchRecommendedPlaylists() {
@@ -308,42 +307,28 @@ export default {
         return []; // 返回空数组作为默认值
       }
     },
+    refreshRecommended(){
+      console.log("刷新推荐歌单")
+      const currentSong = this.currentSong;
+      console.log(currentSong)
+      if (!currentSong || !currentSong.url) {
+        console.error("当前没有播放的歌曲");
+        return;
+      }
 
-    // 音频播放器相关方法
-    togglePlay() {
-      const audioPlayer = this.$refs.audioPlayer;
-      console.log(audioPlayer);
-      // const audioPlayer = this.currentSong;
-      if (audioPlayer) {
-        if (this.isPlaying) {
-          audioPlayer.pause();
-        } else audioPlayer.play();
-        this.isPlaying = !this.isPlaying;
-      }
-    },
-    updateTime() {
-      const audioPlayer = this.$refs.audioPlayer;
-      if (audioPlayer) {
-        this.currentTime = audioPlayer.currentTime;
-      }
-    },
-    loadMetadata() {
-      const audioPlayer = this.$refs.audioPlayer;
-      if (audioPlayer) {
-        this.duration = audioPlayer.duration;
-      }
-    },
-    seekAudio() {
-      const audioPlayer = this.$refs.audioPlayer;
-      if (audioPlayer) {
-        audioPlayer.currentTime = this.currentTime;
-      }
-    },
-    formatTime(seconds) {
-      const min = Math.floor(seconds / 60);
-      const sec = Math.floor(seconds % 60);
-      return `${min}:${sec < 10 ? "0" + sec : sec}`;
-    },
+      // 发送请求到 Flask API 进行推荐
+      axios.post("http://127.0.0.1:5000/predict", {
+        url: currentSong.url
+      })
+          .then(response => {
+            this.recommendedSongs = response.data.recommended_songs; // 更新推荐歌单
+            console.log("推荐歌曲列表:", this.recommendedSongs);
+          })
+          .catch(error => {
+            console.error("获取推荐失败:", error);
+          });
+    }
+
   },
   mounted() {
     // 组件挂载时加载音频
@@ -371,20 +356,6 @@ export default {
   z-index: 10000;
 }
 
-/* 播放器内容 */
-.player-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-/* 歌曲封面 */
-.cover-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 8px;
-}
-
 /* 歌曲信息 */
 .song-info {
   display: flex;
@@ -395,12 +366,6 @@ export default {
   margin: 0;
   font-size: 16px;
 }
-
-/* .song-info p {
-  margin: 0;
-  font-size: 12px;
-  color: #bbb;
-} */
 
 /* 进度条 */
 input[type="range"] {

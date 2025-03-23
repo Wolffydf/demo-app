@@ -274,6 +274,7 @@ export default {
 /* 进度条 */
 input[type="range"] {
   width: 200px;
+  z-index: 1000;
 }
 
 .time-font {
@@ -287,6 +288,7 @@ input[type="range"] {
   border: none;        /* 去除边框 */
   padding: 8px;          /* 去除内边距 */
   cursor: pointer;     /* 设置鼠标指针为点击状态 */
+  z-index: 1000;
 }
 .button-icon {
   width: 25px;

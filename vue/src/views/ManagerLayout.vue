@@ -22,7 +22,7 @@
           </el-submenu>
           <el-submenu index="3">
             <template slot="title"><i class="el-icon-news"></i>我的</template>
-            <el-menu-item index="2-1">收藏</el-menu-item>
+            <el-menu-item index="/manager/collect">收藏</el-menu-item>
             <el-menu-item index="/manager/user_info">个人信息</el-menu-item>
           </el-submenu>
           <el-submenu index="4">

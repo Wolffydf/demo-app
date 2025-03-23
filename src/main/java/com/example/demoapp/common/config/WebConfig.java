@@ -19,7 +19,8 @@ public class WebConfig implements  WebMvcConfigurer {
                 .excludePathPatterns("/account/register") //放行注册接口，人人都可以注册用户
                 .excludePathPatterns("/playlist/get_playlists")
                 .excludePathPatterns("/playlist/randomSongs")
-                .excludePathPatterns("/audio/**");
+                .excludePathPatterns("/audio/**")
+                .excludePathPatterns("/song/**");
 
     }
 }
