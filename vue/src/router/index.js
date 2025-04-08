@@ -14,6 +14,7 @@ const routes = [
       { path: 'consumer', component: () => import('../views/manager/Consumer.vue') },
       // { path: 'search', component: () => import('../views/manager/SearchView.vue') },
       { path: 'collect', component: () => import('../views/manager/Collect.vue') },
+      { path: 'history', component: () => import('../views/manager/History.vue') },
       { path: 'song_manager', component: () => import('../views/manager/SongManager.vue') },
       { path: 'user_info', component: () => import('../views/manager/UserInfo.vue') }
       

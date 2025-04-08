@@ -15,12 +15,14 @@ public class WebConfig implements  WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor).addPathPatterns("/**")
-                .excludePathPatterns("/account/login") //注意登录接口要放行，因为登录不需要token，登录时生成token，登录后调用其他接口才需要token
-                .excludePathPatterns("/account/register") //放行注册接口，人人都可以注册用户
-                .excludePathPatterns("/playlist/get_playlists")
-                .excludePathPatterns("/playlist/randomSongs")
-                .excludePathPatterns("/audio/**")
-                .excludePathPatterns("/song/**");
+                .excludePathPatterns("/account/login")
+                .excludePathPatterns("/account/register")
+                .excludePathPatterns("/playlist/get_playlists") // 测试接口
+                .excludePathPatterns("/playlist/randomSongs") // 测试接口
+                .excludePathPatterns("/audio/**") // 测试接口
+                .excludePathPatterns("/song/**") // 测试接口
+                .excludePathPatterns("/collect/**") // 测试接口
+                .excludePathPatterns("/history/**"); // 测试接口
 
     }
 }

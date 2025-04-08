@@ -5,7 +5,7 @@
       <el-aside class="m-aside" style="width: 250px;">
         <!--        logo和系统名称-->
         <div class="m-sysName">
-          <img src="@/assets/img/logo.png" alt="" width="10%">
+          <img src="@/assets/img/logo.png" alt="" width="20%">
           <span class="m-nameText">音乐网站</span>
         </div>
         <!--        侧边菜单栏-->
@@ -23,6 +23,7 @@
           <el-submenu index="3">
             <template slot="title"><i class="el-icon-news"></i>我的</template>
             <el-menu-item index="/manager/collect">收藏</el-menu-item>
+            <el-menu-item index="/manager/history">历史记录</el-menu-item>
             <el-menu-item index="/manager/user_info">个人信息</el-menu-item>
           </el-submenu>
           <el-submenu index="4">

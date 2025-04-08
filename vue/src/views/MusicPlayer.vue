@@ -16,10 +16,17 @@
                class="button-icon"
           />
         </button>
+
         <!-- 进度条 -->
         <input class="progress-bar" type="range" min="0" :max="duration" v-model="currentTime" @input="seekAudio"/>
         <!-- 时间显示 -->
         <span class="time-font">{{ formatTime(currentTime) }} / {{ formatTime(duration) }}</span>
+
+        <!-- 喜爱按钮 -->
+        <button @click="toggleFavorite" class="favorite-button" :class="{ 'animate-click': isAnimating }">
+          <img :src="isFavorite ? require('@/assets/img/favorite-filled.png') : require('@/assets/img/favorite.png')" alt="喜爱" class="button-icon"/>
+        </button>
+
       </div>
 
 
@@ -50,6 +57,8 @@ export default {
         url: "", // 音乐文件
       },
       isPlaying: false,
+      isFavorite: false,
+      isAnimating: false,
       currentTime: 0,
       duration: 0,
       rotation: 0,
@@ -96,7 +105,13 @@ export default {
     //   audioPlayer.play();
     //   // this.isPlaying = true;
     // },
-
+    toggleFavorite() {
+      this.isFavorite = !this.isFavorite;
+      this.isAnimating = true;
+      setTimeout(() => {
+        this.isAnimating = false;
+      }, 300);
+    },
     // 开始旋转
     startRotation() {
       // 每 100ms 更新一次旋转角度
@@ -283,12 +298,36 @@ input[type="range"] {
   color: #034c9f;
 }
 
-.play-button {
+.play-button{
   background: none;    /* 去除背景色 */
   border: none;        /* 去除边框 */
   padding: 8px;          /* 去除内边距 */
   cursor: pointer;     /* 设置鼠标指针为点击状态 */
   z-index: 1000;
+}
+.favorite-button {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  z-index: 1000;
+  transform: scale(1.4); /* 初始大小 */
+  transition: transform 0.1s; /* 过渡效果 */
+
+}
+.animate-click {
+  animation: clickAnimation 0.5s ease;
+}
+@keyframes clickAnimation {
+  0% {
+    transform: scale(1.4);
+  }
+  50% {
+    transform: scale(1.8); /* 放大到 1.2 倍 */
+  }
+  100% {
+    transform: scale(1.4);
+  }
 }
 .button-icon {
   width: 25px;

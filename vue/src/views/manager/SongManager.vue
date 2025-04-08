@@ -26,7 +26,7 @@
                     <el-table-column fixed="right" label="操作">
                         <template #default="scope">
                             <el-button @click="handleClick(scope.row)" type="text" size="small">播放</el-button>
-                            <el-button type="text" size="small">收藏</el-button>
+                            <el-button type="text" size="small">删除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>

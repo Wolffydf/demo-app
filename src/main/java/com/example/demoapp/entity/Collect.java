@@ -22,6 +22,9 @@ public class Collect {
     @Column(name = "create_time")
     private LocalDateTime create_time;
 
+    private String song_name;
+    private String playlist_name;
+
     public Integer getId() {
         return id;
     }
@@ -68,5 +71,21 @@ public class Collect {
 
     public void setCreate_time(LocalDateTime create_time) {
         this.create_time = create_time;
+    }
+
+    public String getSong_name() {
+        return song_name;
+    }
+
+    public void setSong_name(String song_name) {
+        this.song_name = song_name;
+    }
+
+    public String getPlaylist_name() {
+        return playlist_name;
+    }
+
+    public void setPlaylist_name(String playlist_name) {
+        this.playlist_name = playlist_name;
     }
 }

@@ -6,7 +6,7 @@ body {
 /*左侧边栏*/
 .m-aside {
   width: 270px;
-  background: linear-gradient(to right, #1c5b8b, #c6e3ff); /* 从深蓝到浅蓝渐变 */
+  background: linear-gradient(to right, #0071e2, #4e99e9);
   overflow: hidden;
   min-height: 100vh;
 }
@@ -33,13 +33,13 @@ body {
 
 /*侧边栏菜单栏*/
 .el-menu {
-  background: linear-gradient(to right, #1c5b8b, #c6e3ff);
+  background: linear-gradient(to right, #0071e2, #4e99e9);
   border-right: none !important;
 }
 
 /*头部栏样式*/
 .el-header {
-  background: linear-gradient(to right, #c6e3ff, #f7f7f7);
+  /*background: linear-gradient(to right, #c6e3ff, #f7f7f7);*/
   /* 淡蓝色背景 */
   border-bottom: 1px solid #e8e8e8;
   /* 调整边框颜色 */
@@ -50,7 +50,7 @@ body {
 
 /* 右侧背景颜色*/
 .right-container {
-  background: linear-gradient(to right, #c6e3ff, #e0e8f3);
+  /*background: linear-gradient(to right, #c6e3ff, #e0e8f3);*/
   /* 浅蓝色 */
   height: 100vh;
 }

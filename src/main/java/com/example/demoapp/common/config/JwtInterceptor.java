@@ -43,6 +43,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         }
         // 2. 开始执行认证
         if (StrUtil.isBlank(token)) {
+//            System.out.println("请求Token: " + token);
             throw new CustomException(ResultCode.TOKEN_INVALID_ERROR);
         }
         Account user = null;

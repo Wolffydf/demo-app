@@ -21,10 +21,10 @@
       </el-header>
 
 
-      <el-main style="background: linear-gradient(to right, #c6e3ff, #f7f7f7);">
+      <el-main style="background: #FFFFFF;border-radius: 10px;">
         <!-- div1：主页 -->
         <div v-if="!showSearchResult"
-             style="padding: 40px; background: linear-gradient(to right, #c6e3ff, #f7f7f7); border-radius: 4px;">
+             style="padding: 40px; background: #FFFFFF; border-radius: 4px;">
           <!-- <h2>主页面内容，推荐歌单和热门歌曲展示</h2> -->
 
           <!-- 推荐歌单区 -->

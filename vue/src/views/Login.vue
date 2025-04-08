@@ -103,7 +103,7 @@
   .login-container {
     height: 100vh;
     overflow: hidden;
-    background-image: url("@/assets/img/avatar.jpeg");
+    background-image: url("@/assets/img/bg.png");
     background-size: 100%;
     display: flex;
     align-items: center;

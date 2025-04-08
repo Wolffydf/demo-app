@@ -1,8 +1,6 @@
 package com.example.demoapp.controller;
 
-import com.example.demoapp.common.Result;
 import com.example.demoapp.entity.Collect;
-import com.example.demoapp.service.AdminService;
 import com.example.demoapp.service.CollectService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +9,8 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*", allowCredentials = "true")
 @RestController
-@RequestMapping("/collect")
-public class CollectController {
+@RequestMapping("/history")
+public class HistoryController {
     @Resource
     private CollectService collectService;
 
