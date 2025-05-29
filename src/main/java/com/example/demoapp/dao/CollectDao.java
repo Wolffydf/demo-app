@@ -14,7 +14,7 @@ public interface CollectDao extends Mapper<Collect> {
     List<Collect> findByUserId(@Param("user_id") Integer userId);
 
     @Insert("INSERT INTO collect (user_id, type, song_id, playlist_id, create_time) " +
-            "VALUES (#{userId}, #{type}, #{songId}, #{playlistId}, NOW())")
+            "VALUES (#{user_id}, #{type}, #{song_id}, #{playlist_id}, NOW())")
     int insertCollect(Collect collect);
 
     @Delete("DELETE FROM collect WHERE id = #{id}")

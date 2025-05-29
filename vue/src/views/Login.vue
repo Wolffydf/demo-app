@@ -67,9 +67,12 @@
           // 如果用户角色为1，调用管理员登录的接口
           request.post('/account/login', this.form).then(res => {
             if(res.code === '0') {
+              // 登录组件
+
               this.$notify.success("登录成功！");
               let token = res.data.token;
               let user = res.data.user;
+              // this.$store.dispatch('login', user)
               // console.log(res.data);
 
               // 拿到之后存入缓存

@@ -17,7 +17,7 @@ const routes = [
       { path: 'history', component: () => import('../views/manager/History.vue') },
       { path: 'song_manager', component: () => import('../views/manager/SongManager.vue') },
       { path: 'user_info', component: () => import('../views/manager/UserInfo.vue') }
-      
+
     ]
   },
   {

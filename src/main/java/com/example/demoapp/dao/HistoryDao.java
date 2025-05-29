@@ -14,7 +14,7 @@ public interface HistoryDao extends Mapper<History> {
     List<History> findByUserId(@Param("user_id") Integer userId);
 
     @Insert("INSERT INTO history (user_id, song_id, play_time) " +
-            "VALUES (#{userId}, #{songId}, NOW())")
+            "VALUES (#{user_id}, #{song_id}, NOW())")
     int insertHistory(History history);
 
     @Delete("DELETE FROM history WHERE id = #{id}")

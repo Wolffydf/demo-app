@@ -23,11 +23,11 @@ body {
 
 /*侧边栏上面的文字*/
 .m-nameText {
-  font-family: 华文新魏;
+  font-family: 'DengXian Light', sans-serif;
   color: #FFFFFF;
   /* 纯白色 */
   margin-left: 10px;
-  font-size: 35px;
+  font-size: 28px;
   font-weight: 700;
 }
 
@@ -65,10 +65,10 @@ body {
 
 /*侧边栏菜单一级字体颜色*/
 .el-submenu__title {
-  font-family: 华文细黑;
+  font-family: 'DengXian Light', sans-serif;
   color: #FFFFFF;
   font-weight: 600;
-  font-size: 17px;
+  font-size: 18px;
   letter-spacing: 1px;
 }
 
@@ -76,14 +76,14 @@ body {
 .el-menu-item:hover,
 .el-submenu__title:hover {
   background: linear-gradient(to right, #0c35558a, #50a7f85a);
-  border-radius: 20px;
+  border-radius: 8px;
   transition: background 0.5s ease;
   
 }
 
 /*侧边栏二级字体颜色*/
 .el-menu-item {
-  font-family: 华文细黑;
+  font-family: 'DengXian Light', sans-serif;
   color: #FFFFFF;
   font-weight: 500;
   letter-spacing: 2px;
@@ -96,7 +96,7 @@ body {
   font-size: 14px;
   background: linear-gradient(to right, #0c3555, #50a7f8);
   font-weight: 600;
-  border-radius: 20px;
+  border-radius: 8px;
 }
 
 /* 主要内容区背景样式*/

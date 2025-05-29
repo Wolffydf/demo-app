@@ -1,7 +1,9 @@
 package com.example.demoapp.controller;
 
 import com.example.demoapp.entity.Collect;
+import com.example.demoapp.entity.History;
 import com.example.demoapp.service.CollectService;
+import com.example.demoapp.service.HistoryService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,23 +14,23 @@ import java.util.List;
 @RequestMapping("/history")
 public class HistoryController {
     @Resource
-    private CollectService collectService;
+    private HistoryService historyService;
 
     @GetMapping("/list")
-    public List<Collect> getCollects(@RequestParam Integer userId) {
-        List<Collect> collects = collectService.getUserCollects(userId);
-        System.out.println(collects); // 打印返回的数据，确保数据正确
-        return collects;
+    public List<History> getHistories(@RequestParam Integer userId) {
+        List<History> histories = historyService.getUserHistory(userId);
+        System.out.println(histories);
+        return histories;
     }
 
     @PostMapping("/add")
-    public boolean addCollect(@RequestBody Collect collect) {
-        return collectService.addCollect(collect);
+    public boolean addHistory(@RequestBody History history) {
+        return historyService.addHistory(history);
     }
 
     @DeleteMapping("/delete/{id}")
-    public boolean deleteCollect(@PathVariable Integer id) {
-        return collectService.removeCollect(id);
+    public boolean deleteHistory(@PathVariable Integer id) {
+        return historyService.removeHistory(id);
     }
 
 }

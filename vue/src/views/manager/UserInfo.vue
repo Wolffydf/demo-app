@@ -23,7 +23,7 @@
                 <el-form-item label="性别"><el-input v-model="user.sex" /></el-form-item>
                 <el-form-item label="电话"><el-input v-model="user.tel" /></el-form-item>
                 <el-form-item label="邮箱"><el-input v-model="user.email" /></el-form-item>
-                <el-form-item label="出生日期"><el-input v-model="user.birth" /></el-form-item>
+                <el-form-item label="出生日期"><el-input v-model="user.birth" :disabled="true"/></el-form-item>
                 <el-form-item label="简介"><el-input v-model="user.introduction" /></el-form-item>
                 <el-form-item label="所在地"><el-input v-model="user.location" /></el-form-item>
             </el-form>

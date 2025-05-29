@@ -62,6 +62,7 @@ export default {
       currentTime: 0,
       duration: 0,
       rotation: 0,
+      user: JSON.parse(localStorage.getItem("user") || {}),
     };
   },
   created() {
@@ -108,9 +109,35 @@ export default {
     toggleFavorite() {
       this.isFavorite = !this.isFavorite;
       this.isAnimating = true;
+      console.log(this.user.id)
+      console.log(this.song.id)
       setTimeout(() => {
         this.isAnimating = false;
       }, 300);
+      if (this.isFavorite) {
+        console.log("收藏")
+        // 添加到收藏
+        request.post("/collect/add", {
+
+            user_id: this.user.id,
+            type: 1,
+            song_id: this.song.id,
+            playlist_id: null,
+
+        })
+            .then(response => {
+              console.log(response.data);
+              // 添加成功
+            })
+            .catch(error => {
+              console.error(error);
+              // 添加失败
+            });
+      } else {
+        // 从收藏中移除
+        console.log("取消收藏")
+      }
+
     },
     // 开始旋转
     startRotation() {

@@ -4,7 +4,7 @@ import router from "@/router";
 
 // 创建一个axios对象出来
 const request = axios.create({
-    baseURL: "http://localhost:8090", //这里跟后端端口号保持一致
+    baseURL: "http://localhost:8090", //后端端口号
     timeout: 5000
 })
 

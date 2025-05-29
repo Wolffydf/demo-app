@@ -1,6 +1,7 @@
 .playlist-song {
     cursor: pointer;
-    font-size: 16px;
+    font-family: 'DengXian', sans-serif;
+    font-size: 20px;
     margin-bottom: 10px;
     transition: 0.3s ease;
 }

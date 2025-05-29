@@ -6,7 +6,7 @@ public class CustomException extends RuntimeException {
     private String code;
     private String msg;
 
-    public CustomException(ResultCode resultCode) {  //这个方法的参数就是刚刚我们创建的ResultCode类
+    public CustomException(ResultCode resultCode) {  //参数就是创建的ResultCode类
         this.code = resultCode.code;
         this.msg = resultCode.msg;
     }

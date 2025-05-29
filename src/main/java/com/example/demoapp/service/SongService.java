@@ -10,13 +10,9 @@ import java.util.List;
 
 @Service
 public class SongService {
-
     @Resource
     SongDao songDao;
-
     public List<Song> getAll(){
-
         return songDao.selectAll();
     }
-
 }

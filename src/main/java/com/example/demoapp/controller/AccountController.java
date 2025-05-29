@@ -49,6 +49,8 @@ public class AccountController {
     public Result accountLogin(@RequestBody Account account){
         Integer role = account.getRole();
         Account login = new Account(); // 定义一个Account类的login,用于返回给前端
+        
+        // 识别角色身份
         if ( 1 == role){
             Admin admin = new Admin(); //创建一个管理员类admin
             BeanUtils.copyProperties(account,admin); //把父类的属性拷贝到admin
@@ -59,7 +61,6 @@ public class AccountController {
             BeanUtils.copyProperties(account,consumer);
             login = consumerService.consumerLogin(consumer);
         }
-
         //        生成token
         String token = JwtTokenUtils.genToken(login.getId() + "-" + login.getRole(), login.getPassword());
         //        创建一个键值对map集合，把token和user塞进去，返回给前端

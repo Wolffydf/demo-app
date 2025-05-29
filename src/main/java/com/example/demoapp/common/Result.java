@@ -35,7 +35,7 @@ public class Result {
         this.data = data;
     }
 
-    //    自定义方法
+
     public static Result success() {
 //        创建了一个Result对象
         Result result = new Result();

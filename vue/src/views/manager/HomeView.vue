@@ -11,12 +11,16 @@
               </el-row>
             </template>
 </el-input> -->
-          <div class="search">
-            <input v-model="input1" placeholder="Search..." type="text">
-            <button type="submit" @click="searchMusic">Go</button>&nbsp;
+          <div style="display: flex;justify-content: space-between">
+            <div class="search">
+              <input v-model="input1" placeholder="Search..." type="text">
+              <button type="submit" @click="searchMusic">Go</button>&nbsp;
 
+            </div>
+            <div class="search">
+              <button type="submit" @click="refreshRecommended" style="margin-left: 10px;min-width: 80px">刷新</button>
+            </div>
           </div>
-          <button type="submit" @click="refreshRecommended" style="margin-left: 10px;">刷新</button>
         </div>
       </el-header>
 
@@ -24,12 +28,12 @@
       <el-main style="background: #FFFFFF;border-radius: 10px;">
         <!-- div1：主页 -->
         <div v-if="!showSearchResult"
-             style="padding: 40px; background: #FFFFFF; border-radius: 4px;">
+             style="padding: 25px 40px; background: #FFFFFF; border-radius: 4px;">
           <!-- <h2>主页面内容，推荐歌单和热门歌曲展示</h2> -->
 
           <!-- 推荐歌单区 -->
           <div class="song-list-section">
-            <h3>推荐歌单</h3>
+            <h3 class="zone-title">推荐歌单</h3>
             <div class="playlist-grid">
               <el-card v-for="playlist in Playlists" :key="playlist.id" class="playlist-card"
                        :style="{ backgroundImage: `url(${playlist.pic})` }">
@@ -52,7 +56,7 @@
 
           <!-- 推荐歌曲区 -->
           <div class="recommended-songs-section" style="margin-top: 40px;">
-            <h3>推荐歌曲</h3>
+            <h3 class="zone-title">推荐歌曲</h3>
             <div class="song-grid">
               <div v-for="song in recommendedSongs" :key="song.id" class="song-card">
                 <div class="bg"></div>
@@ -62,7 +66,7 @@
                   <img :src="song.pic" alt="歌曲封面" class="song-cover"/>
                 </div>
                 <div class="song-info">
-                  <p class="song-name">{{ song.name }}</p>
+                  <p class="song-name" @click="openModal(song)">{{ song.name }}</p>
                   <p class="singer-name">{{ song.singer_name }}</p>
                 </div>
 
@@ -73,7 +77,7 @@
 
           <!-- 最新发布的歌曲 -->
           <div class="new-songs-section" style="margin-top: 40px;">
-            <h3>最新发布的歌曲</h3>
+            <h3 class="zone-title">最新发布的歌曲</h3>
             <el-row :gutter="20">
               <el-col :span="6" v-for="(song, index) in newSongs" :key="index">
                 <el-card :body-style="{ padding: '20px' }" class="song-card">
@@ -194,6 +198,7 @@ export default {
       isPlaying: false,
       currentTime: 0,
       duration: 0,
+      user: JSON.parse(localStorage.getItem("user") || {}),
     };
   },
   created() {
@@ -260,12 +265,32 @@ export default {
         pic: this.currentSong.pic || require('@/assets/img/record.png')
       };
 
+      const historyData = {
+        user_id: this.user.id,
+        song_id: this.currentSong.id,
+        // play_time: new Date()
+      };
+      console.log("historyData", historyData);
+      this.addHistoryRecord(historyData);
+
       // 触发事件，传递歌曲数据
       EventBus.$emit("update-song", songData);
     },
 
+    addHistoryRecord(data) {
+      request.post('/history/add', data)
+        .then(response => {
+          console.log("添加成功", response.data);
+          // 添加成功
+        })
+        .catch(error => {
+          console.error("添加失败", error);
+          // 添加失败
+        });
+    },
+
     async fetchRecommendedPlaylists() {
-      const playlistIds = [2, 3, 8, 10];
+      const playlistIds = [2, 3, 8, 10]; // 后续选择四类历史听歌的类别 || 随机选择四类
       try {
         const response = await axios.post('http://localhost:8090/playlist/get_playlists', playlistIds, {
           headers: {
@@ -310,7 +335,7 @@ export default {
     refreshRecommended(){
       console.log("刷新推荐歌单")
       const currentSong = this.currentSong;
-      console.log(currentSong)
+      console.log('currentSong', currentSong)
       if (!currentSong || !currentSong.url) {
         console.error("当前没有播放的歌曲");
         return;
@@ -319,6 +344,7 @@ export default {
       // 发送请求到 Flask API 进行推荐
       axios.post("http://127.0.0.1:5000/predict", {
         url: currentSong.url
+
       })
           .then(response => {
             this.recommendedSongs = response.data.recommended_songs; // 更新推荐歌单
@@ -367,6 +393,10 @@ export default {
   font-size: 16px;
 }
 
+.zone-title {
+  font-family: 'DengXian', sans-serif;
+  font-size: 40px;
+}
 /* 进度条 */
 input[type="range"] {
   width: 200px;
